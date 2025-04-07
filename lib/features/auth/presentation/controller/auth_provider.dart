@@ -1,9 +1,9 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../data/services/auth_service.dart';
 import '../../data/repository/auth_repository.dart';
 import '../../data/repository/auth_repository_impl.dart';
+import '../../data/services/auth_service.dart';
 
 final authRepositoryProvider = Provider<AuthRepository>((ref) {
   return AuthRepositoryImpl(AuthService());
@@ -19,40 +19,31 @@ class AuthStateNotifier extends StateNotifier<AsyncValue<User?>> {
 
   Future<void> signInWithEmail(String email, String password) async {
     state = const AsyncValue.loading();
-    final result = await AsyncValue.guard(
-      () async => await repository.signInWithEmail(email, password),
+    state = await AsyncValue.guard(
+      () async => repository.signInWithEmail(email, password),
     );
-    if (result.hasError) {
-      state = const AsyncValue.data(null);
-    }
-    state = result;
   }
 
   Future<void> registerWithEmail(String email, String password) async {
     state = const AsyncValue.loading();
-    final result = await AsyncValue.guard(
-      () async => await repository.registerWithEmail(email, password),
+    state = await AsyncValue.guard(
+      () async => repository.registerWithEmail(email, password),
     );
-    if (result.hasError) {
-      state = const AsyncValue.data(null);
-    }
-    state = result;
   }
 
   Future<void> signInWithGoogle() async {
     state = const AsyncValue.loading();
-    final result = await AsyncValue.guard(
-      () async => await repository.signInWithGoogle(),
-    );
-    if (result.hasError) {
-      state = const AsyncValue.data(null);
-    }
-    state = result;
+    state = await AsyncValue.guard(() async => repository.signInWithGoogle());
   }
 
   Future<void> signOut() async {
-    await AsyncValue.guard(() async => await repository.signOut());
-    state = const AsyncValue.data(null);
+    // await AsyncValue.guard(() async => await repository.signOut());
+    // state = const AsyncValue.data(null);
+    final result = await AsyncValue.guard(() => repository.signOut());
+    state =
+        result.hasError
+            ? AsyncError(result.error!, result.stackTrace!)
+            : const AsyncValue.data(null);
   }
 }
 

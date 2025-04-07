@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pixels_app/core/app_extensions.dart';
+
+import '../../../../core/app_extensions.dart';
 
 class HeaderText extends StatelessWidget {
   const HeaderText({super.key, required this.title});
