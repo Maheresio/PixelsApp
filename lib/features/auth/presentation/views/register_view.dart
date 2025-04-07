@@ -54,13 +54,13 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
             if (previous != next) {
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
-                  content: Text(AppStrings.loginSuccessful),
+                  content: Text(AppStrings.registerSuccessful),
                   backgroundColor: Colors.green,
                 ),
               );
             }
             GoRouter.of(context).go(AppRouter.homeView);
-            next = const AsyncData(null);
+            
           }
         },
         loading: () {},

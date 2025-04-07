@@ -28,6 +28,7 @@ static const String searchPhotos = 'Search photos...';
 
 static const String orLoginWith = 'Or login with';
 static const String loginSuccessful = 'Login successful!';
+static const String registerSuccessful = 'Register successful!';
 static const String errorOccurred = 'Error occurred';
 static const String home = 'Home';
 static const String logoutSuccessful = 'Logout successful!';
