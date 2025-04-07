@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pixels_app/features/auth/presentation/controller/auth_provider.dart';
 
 import '../../../../core/app_strings.dart';
+import '../controller/auth_provider.dart';
 import 'styled_social_button.dart';
 
 class SocialSection extends StatelessWidget {

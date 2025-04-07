@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:pixels_app/core/error/failure.dart';
+import 'failure.dart';
 
 class ServerFailure extends Failure {
   const ServerFailure(super.errorMsg);

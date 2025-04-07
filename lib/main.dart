@@ -5,8 +5,8 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:pixels_app/core/app_colors.dart';
-import 'package:pixels_app/core/theme.dart';
+import 'core/app_colors.dart';
+import 'core/theme.dart';
 
 import 'core/app_router.dart';
 

@@ -1,15 +1,15 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:pixels_app/core/services/api_service.dart';
-import 'package:pixels_app/features/auth/presentation/views/profile_view.dart';
-import 'package:pixels_app/features/auth/presentation/views/login_view.dart';
-import 'package:pixels_app/features/auth/presentation/views/register_view.dart';
-import 'package:pixels_app/features/home/data/repository/home_repository_impl.dart';
-import 'package:pixels_app/features/home/presentation/controller/bloc/photo_bloc.dart';
 
 import '../features/auth/presentation/views/landing_view.dart';
+import '../features/auth/presentation/views/login_view.dart';
+import '../features/auth/presentation/views/profile_view.dart';
+import '../features/auth/presentation/views/register_view.dart';
+import '../features/home/data/repository/home_repository_impl.dart';
+import '../features/home/presentation/controller/bloc/photo_bloc.dart';
 import '../features/home/presentation/view/home_view.dart';
+import 'services/api_service.dart';
 
 class AppRouter {
   static const String landingView = '/';

@@ -1,10 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:pixels_app/core/error/failure.dart';
 import 'package:pixels_app/features/home/data/model/photo_model.dart';
 import 'package:pixels_app/features/home/data/repository/home_repository.dart';
 
 import '../../../../core/api_constants.dart';
+import '../../../../core/error/failure.dart';
 import '../../../../core/error/server_failure.dart';
 import '../../../../core/services/api_service.dart';
 

@@ -1,8 +1,9 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:pixels_app/core/app_strings.dart';
-import 'package:pixels_app/features/home/data/model/photo_model.dart';
-import 'package:pixels_app/features/home/data/repository/home_repository.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../../core/app_strings.dart';
+import '../../../data/model/photo_model.dart';
+import '../../../data/repository/home_repository.dart';
 
 part 'photo_event.dart';
 part 'photo_state.dart';

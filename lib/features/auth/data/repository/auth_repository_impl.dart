@@ -1,8 +1,8 @@
 import 'dart:io';
 
-import 'package:pixels_app/core/error/failure.dart';
-import 'package:pixels_app/core/error/firebase_failure.dart';
-import 'package:pixels_app/core/error/socket_failure.dart';
+import '../../../../core/error/failure.dart';
+import '../../../../core/error/firebase_failure.dart';
+import '../../../../core/error/socket_failure.dart';
 
 import '../services/auth_service.dart';
 import 'auth_repository.dart';

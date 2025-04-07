@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:pixels_app/core/app_colors.dart';
-import 'package:pixels_app/core/app_router.dart';
-import 'package:pixels_app/core/app_strings.dart';
+import '../../../../core/app_colors.dart';
+import '../../../../core/app_router.dart';
+import '../../../../core/app_strings.dart';
 import 'package:pixels_app/features/auth/presentation/widgets/header_text.dart';
 
 import '../../../../core/error/failure.dart';

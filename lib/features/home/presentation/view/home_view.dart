@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:pixels_app/features/home/presentation/controller/bloc/photo_bloc.dart';
-import 'package:pixels_app/features/home/presentation/widgets/home_view_body.dart';
+import '../controller/bloc/photo_bloc.dart';
+import '../widgets/home_view_body.dart';
 
 import '../../../../core/app_router.dart';
 import '../../../../core/app_strings.dart';

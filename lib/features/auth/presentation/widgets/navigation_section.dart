@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:pixels_app/core/app_extensions.dart';
-import 'package:pixels_app/core/app_router.dart';
 
 import '../../../../core/app_colors.dart';
+import '../../../../core/app_extensions.dart';
+import '../../../../core/app_router.dart';
 import '../../../../core/app_strings.dart';
 
 class NavigationSection extends StatelessWidget {
