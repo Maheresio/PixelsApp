@@ -89,7 +89,7 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
             return const Center(child: Text(AppStrings.errorOccurred));
           },
         );
-
+    final widthSize = MediaQuery.sizeOf(context).width;
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -98,36 +98,46 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
             key: _formKey,
             child: Builder(
               builder: (context) {
-                return SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      const HeaderText(title: AppStrings.register),
-                      const SizedBox(height: 100),
-                      UserInputSection(
-                        emailController: emailController,
-                        passController: passController,
-                      ),
-                      const SizedBox(height: 40),
-                      SubmitButton(
-                        onPressed:
-                            authState.isLoading
-                                ? null
-                                : () {
-                                  if (_formKey.currentState!.validate()) {
-                                    authNotifier.registerWithEmail(
-                                      emailController.text,
-                                      passController.text,
-                                    );
-                                  }
-                                },
-                        text: AppStrings.register,
-                      ),
+                return Center(
+                  child: SingleChildScrollView(
+                    child: SizedBox(
+                      width:
+                          widthSize > 1200
+                              ? widthSize * .3
+                              : widthSize > 600
+                              ? widthSize * .6
+                              : widthSize,
+                      child: Column(
+                        children: [
+                          const HeaderText(title: AppStrings.register),
+                          const SizedBox(height: 100),
+                          UserInputSection(
+                            emailController: emailController,
+                            passController: passController,
+                          ),
+                          const SizedBox(height: 40),
+                          SubmitButton(
+                            onPressed:
+                                authState.isLoading
+                                    ? null
+                                    : () {
+                                      if (_formKey.currentState!.validate()) {
+                                        authNotifier.registerWithEmail(
+                                          emailController.text,
+                                          passController.text,
+                                        );
+                                      }
+                                    },
+                            text: AppStrings.register,
+                          ),
 
-                      const NavigationSection(isLogin: false),
-                      const SizedBox(height: 20),
+                          const NavigationSection(isLogin: false),
+                          const SizedBox(height: 20),
 
-                      SocialSection(authNotifier: authNotifier),
-                    ],
+                          SocialSection(authNotifier: authNotifier),
+                        ],
+                      ),
+                    ),
                   ),
                 );
               },

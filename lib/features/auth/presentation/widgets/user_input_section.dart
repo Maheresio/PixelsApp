@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/app_strings.dart';
 import '../../../../core/helpers/validation.dart';
 
-class UserInputSection extends StatelessWidget {
+class UserInputSection extends StatefulWidget {
   const UserInputSection({
     super.key,
     required this.emailController,
@@ -14,6 +14,12 @@ class UserInputSection extends StatelessWidget {
   final TextEditingController passController;
 
   @override
+  State<UserInputSection> createState() => _UserInputSectionState();
+}
+
+class _UserInputSectionState extends State<UserInputSection> {
+  bool isObscure = true;
+  @override
   Widget build(BuildContext context) {
     return Column(
       spacing: 12,
@@ -23,18 +29,34 @@ class UserInputSection extends StatelessWidget {
 
           textInputAction: TextInputAction.next,
           keyboardType: TextInputType.emailAddress,
-          autofocus: true,
-          controller: emailController,
+
+          controller: widget.emailController,
           decoration: const InputDecoration(labelText: AppStrings.email),
         ),
-        TextFormField(
-          validator: passwordValidator,
-          controller: passController,
-          decoration: const InputDecoration(labelText: AppStrings.password),
-          obscureText: true,
+        StatefulBuilder(
+          builder: (context, setState) {
+            return TextFormField(
+              validator: passwordValidator,
+              controller: widget.passController,
+              decoration: InputDecoration(
+                labelText: AppStrings.password,
+                suffixIcon: IconButton(
+                  icon:
+                      isObscure
+                          ? const Icon(Icons.visibility_off)
+                          : const Icon(Icons.visibility),
+                  onPressed:
+                      () => setState(() {
+                        isObscure = !isObscure;
+                      }),
+                ),
+              ),
+
+              obscureText: isObscure,
+            );
+          },
         ),
       ],
     );
   }
 }
-

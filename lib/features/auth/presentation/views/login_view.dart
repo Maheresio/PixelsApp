@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pixels_app/core/app_colors.dart';
 import 'package:pixels_app/core/app_router.dart';
@@ -76,45 +77,57 @@ class _LoginViewState extends ConsumerState<LoginView> {
         },
       );
     });
-
+    final widthSize = MediaQuery.sizeOf(context).width;
     return Scaffold(
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 60),
+
           child: Form(
             key: _formKey,
             child: Builder(
               builder: (context) {
                 return authState.isLoading
                     ? const Center(child: CircularProgressIndicator())
-                    : SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          const HeaderText(title: AppStrings.login),
-                          const SizedBox(height: 100),
-                          UserInputSection(
-                            emailController: emailController,
-                            passController: passController,
+                    : Center(
+                      child: SingleChildScrollView(
+                        child: SizedBox(
+                          width:
+                              widthSize > 1200
+                                  ? widthSize * .3
+                                  : widthSize > 600
+                                  ? widthSize * .6
+                                  : widthSize,
+                          child: Column(
+                            children: [
+                              const HeaderText(title: AppStrings.login),
+                              const SizedBox(height: 100),
+                              UserInputSection(
+                                emailController: emailController,
+                                passController: passController,
+                              ),
+                              const SizedBox(height: 40),
+                              SubmitButton(
+                                onPressed:
+                                    authState.isLoading
+                                        ? null
+                                        : () {
+                                          if (_formKey.currentState!
+                                              .validate()) {
+                                            authNotifier.signInWithEmail(
+                                              emailController.text,
+                                              passController.text,
+                                            );
+                                          }
+                                        },
+                                text: AppStrings.login,
+                              ),
+                              const NavigationSection(),
+                              const SizedBox(height: 20),
+                              SocialSection(authNotifier: authNotifier),
+                            ],
                           ),
-                          const SizedBox(height: 40),
-                          SubmitButton(
-                            onPressed:
-                                authState.isLoading
-                                    ? null
-                                    : () {
-                                      if (_formKey.currentState!.validate()) {
-                                        authNotifier.signInWithEmail(
-                                          emailController.text,
-                                          passController.text,
-                                        );
-                                      }
-                                    },
-                            text: AppStrings.login,
-                          ),
-                          const NavigationSection(),
-                          const SizedBox(height: 20),
-                          SocialSection(authNotifier: authNotifier),
-                        ],
+                        ),
                       ),
                     );
               },

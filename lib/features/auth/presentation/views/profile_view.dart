@@ -14,7 +14,6 @@ class ProfileView extends ConsumerWidget {
     final authNotifier = ref.watch(authProvider.notifier);
 
     return Scaffold(
-      appBar: AppBar(title: const Text(AppStrings.home)),
       body: Center(
         child: ElevatedButton(
           onPressed: () async {
