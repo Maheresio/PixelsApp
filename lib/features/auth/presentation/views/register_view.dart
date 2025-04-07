@@ -60,7 +60,6 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
               );
             }
             GoRouter.of(context).go(AppRouter.homeView);
-            
           }
         },
         loading: () {},
@@ -81,7 +80,7 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
           }
         },
       );
-      next = const AsyncData(null);
+    
     });
 
     final contentWidth =
@@ -101,34 +100,47 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
               child: SingleChildScrollView(
                 child: SizedBox(
                   width: contentWidth,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                  child: Stack(
                     children: [
-                      const HeaderText(title: AppStrings.register),
-                      const SizedBox(height: 100),
-                      UserInputSection(
-                        emailController: emailController,
-                        passController: passController,
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          const HeaderText(title: AppStrings.register),
+                          const SizedBox(height: 100),
+                          UserInputSection(
+                            emailController: emailController,
+                            passController: passController,
+                          ),
+                          const SizedBox(height: 40),
+                          SubmitButton(
+                            onPressed: () {
+                              if (_formKey.currentState!.validate()) {
+                                authNotifier.registerWithEmail(
+                                  emailController.text,
+                                  passController.text,
+                                );
+                              }
+                            },
+                            text: AppStrings.register,
+                            isLoading: authState.isLoading,
+                          ),
+                          const NavigationSection(isLogin: false),
+                          const SizedBox(height: 20),
+                          SocialSection(authNotifier: authNotifier),
+                        ],
                       ),
-                      const SizedBox(height: 40),
-                      SubmitButton(
-                        onPressed:
-                            authState.isLoading
-                                ? null
-                                : () {
-                                  if (_formKey.currentState!.validate()) {
-                                    authNotifier.registerWithEmail(
-                                      emailController.text,
-                                      passController.text,
-                                    );
-                                  }
-                                },
-                        text: AppStrings.register,
-                        isLoading: authState.isLoading,
-                      ),
-                      const NavigationSection(isLogin: false),
-                      const SizedBox(height: 20),
-                      SocialSection(authNotifier: authNotifier),
+
+                      if (authState.isLoading)
+                        Container(
+                          color: Colors.black.withValues(alpha: 0.5),
+                          child: const Center(
+                            child: CircularProgressIndicator(
+                              valueColor: AlwaysStoppedAnimation(
+                                AppColors.kPrimary,
+                              ),
+                            ),
+                          ),
+                        ),
                     ],
                   ),
                 ),
