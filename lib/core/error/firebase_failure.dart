@@ -6,36 +6,40 @@ class FirebaseFailure extends Failure {
   factory FirebaseFailure.fromCode(String code) {
     switch (code) {
       case 'invalid-email':
-        return FirebaseFailure('The email address is not valid.');
+        return const FirebaseFailure('The email address is not valid.');
       case 'user-disabled':
-        return FirebaseFailure(
+        return const FirebaseFailure(
           'The user corresponding to the given email has been disabled.',
         );
       case 'user-not-found':
-        return FirebaseFailure(
+        return const FirebaseFailure(
           'No user found corresponding to the given email.',
         );
       case 'wrong-password':
-        return FirebaseFailure('The password is invalid for the given email.');
+        return const FirebaseFailure(
+          'The password is invalid for the given email.',
+        );
       case 'too-many-requests':
-        return FirebaseFailure('Too many requests. Please try again later.');
+        return const FirebaseFailure(
+          'Too many requests. Please try again later.',
+        );
       case 'user-token-expired':
-        return FirebaseFailure(
+        return const FirebaseFailure(
           'The user is no longer authenticated. Token has expired.',
         );
       case 'network-request-failed':
-        return FirebaseFailure(
+        return const FirebaseFailure(
           'A network error occurred. Please check your connection.',
         );
       case 'invalid-credential':
       case 'INVALID_LOGIN_CREDENTIALS':
-        return FirebaseFailure('Invalid login credentials provided.');
+        return const FirebaseFailure('Invalid login credentials provided.');
       case 'operation-not-allowed':
-        return FirebaseFailure(
+        return const FirebaseFailure(
           'Email/password accounts are not enabled. Please contact support.',
         );
       default:
-        return FirebaseFailure('An unknown error occurred.');
+        return const FirebaseFailure('An unknown error occurred.');
     }
   }
 }

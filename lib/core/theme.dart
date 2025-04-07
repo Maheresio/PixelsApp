@@ -7,7 +7,7 @@ ThemeData get theme => ThemeData(
   textTheme: GoogleFonts.latoTextTheme(),
 
   scaffoldBackgroundColor: AppColors.kBackgroundColor,
-  colorScheme: ColorScheme.light(
+  colorScheme: const ColorScheme.light(
     primary: AppColors.kPrimary,
     error: AppColors.kErrorColor,
     onPrimary: AppColors.kLightBlack,
@@ -16,7 +16,7 @@ ThemeData get theme => ThemeData(
     onTertiary: AppColors.kSuccessColor,
   ),
 
-  inputDecorationTheme: InputDecorationTheme(
+  inputDecorationTheme: const InputDecorationTheme(
     filled: true,
     fillColor: AppColors.kwhite,
 
@@ -35,7 +35,7 @@ ThemeData get theme => ThemeData(
   textButtonTheme: TextButtonThemeData(
     style: ButtonStyle(
       padding: WidgetStateProperty.all(
-        EdgeInsets.symmetric(horizontal: 0, vertical: 16),
+        const EdgeInsets.symmetric(vertical: 16),
       ),
 
       foregroundColor: WidgetStateProperty.resolveWith((states) {
@@ -50,16 +50,16 @@ ThemeData get theme => ThemeData(
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ButtonStyle(
       textStyle: WidgetStateProperty.all(
-        TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+        const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
       ),
       backgroundColor: WidgetStateProperty.all(AppColors.kPrimary),
       shape: WidgetStateProperty.all(
         RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
       ),
-      foregroundColor: WidgetStatePropertyAll(AppColors.kwhite),
-      overlayColor: WidgetStatePropertyAll(Colors.redAccent),
+      foregroundColor: const WidgetStatePropertyAll(AppColors.kwhite),
+      overlayColor: const WidgetStatePropertyAll(Colors.redAccent),
     ),
   ),
 
-  dividerTheme: DividerThemeData(color: AppColors.kPrimary),
+  dividerTheme: const DividerThemeData(color: AppColors.kPrimary),
 );

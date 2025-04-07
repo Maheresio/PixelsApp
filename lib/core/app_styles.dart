@@ -17,7 +17,7 @@ abstract class AppStyles {
 
   static TextStyle text11Regular = base(size: 11);
 
-  static final TextStyle text14Medium = base(size: 14, weight: FontWeight.w500);
+  static final TextStyle text14Medium = base(weight: FontWeight.w500);
 
   static final TextStyle text34Bold = base(size: 34, weight: FontWeight.bold);
 
