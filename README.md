@@ -12,13 +12,13 @@
 
 ### 📱 Screenshots
 <p align="center">
-  <img src="screenshot1.png" width="200" alt="Login Screen" />
-  <img src="screenshot2.png" width="200" alt="Home Grid" />
-  <img src="screenshot3.png" width="200" alt="Search in Action" />
-  <img src="screenshot4.png" width="200" alt="Filter Magic" />
-  <img src="screenshot5.png" width="200" />
-  <img src="screenshot6.png" width="200"  />
-  <img src="screenshot7.png" width="200"  />
+  <img src="1.png" width="200" alt="Login Screen" />
+  <img src="2.png" width="200" alt="Home Grid" />
+  <img src="3.png" width="200" alt="Search in Action" />
+  <img src="4.png" width="200" alt="Filter Magic" />
+  <img src="5.png" width="200" />
+  <img src="6.png" width="200"  />
+  <img src="7.png" width="200"  />
   
 </p>  
 *These aren’t just screenshots—they’re windows into a masterpiece of design and functionality.*
