@@ -31,6 +31,7 @@ static const String loginSuccessful = 'Login successful!';
 static const String errorOccurred = 'Error occurred';
 static const String home = 'Home';
 static const String logoutSuccessful = 'Logout successful!';
+static const String logoutFailed='Logout failed:';
 static const String logout = 'Logout';
 static const String retry = 'Retry';
 static const String anErrorOccurred = 'An error occurred';

@@ -5,12 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import '../controller/bloc/photo_bloc.dart';
-import '../widgets/home_view_body.dart';
 
 import '../../../../core/app_router.dart';
 import '../../../../core/app_strings.dart';
 import '../../../auth/presentation/controller/auth_provider.dart';
+import '../controller/bloc/photo_bloc.dart';
+import '../widgets/home_view_body.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -86,7 +86,7 @@ class LogoutFloatingButton extends ConsumerWidget {
         error: (error, _) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('Logout failed: ${error.toString()}'),
+              content: Text('${AppStrings.logoutFailed} ${error.toString()}'),
               backgroundColor: Colors.red,
             ),
           );
