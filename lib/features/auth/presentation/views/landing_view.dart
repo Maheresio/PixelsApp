@@ -18,9 +18,7 @@ class LandingView extends ConsumerWidget {
         child: StreamBuilder<User?>(
           stream: authStream,
           builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());
-            }
+           
 
             if (snapshot.hasError) {
               return Column(
@@ -53,7 +51,7 @@ class LandingView extends ConsumerWidget {
               }
             });
 
-            return const Center(child: CircularProgressIndicator());
+            return const Center(child: SizedBox());
           },
         ),
       ),

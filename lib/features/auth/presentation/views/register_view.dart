@@ -42,11 +42,11 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
   @override
   Widget build(BuildContext context) {
     final authNotifier = ref.watch(authProvider.notifier);
-
     final authState = ref.watch(authProvider);
+    final widthSize = MediaQuery.sizeOf(context).width;
 
     ref.listen<AsyncValue>(authProvider, (previous, next) {
-      next.when(
+      next.whenOrNull(
         data: (user) {
           if (user != null) {
             emailController.clear();
@@ -64,83 +64,71 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
         error: (error, _) {
           final errorMessage =
               error is Failure ? error.message : error.toString();
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(
-                errorMessage,
-                style: const TextStyle(color: Colors.white),
+          if (previous?.hasError != true) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                  errorMessage,
+                  style: const TextStyle(color: Colors.white),
+                ),
+                backgroundColor: AppColors.kPrimary,
+                duration: const Duration(seconds: 3),
               ),
-              backgroundColor: AppColors.kPrimary,
-              duration: const Duration(seconds: 3),
-            ),
-          );
+            );
+          }
         },
       );
     });
 
-    ref
-        .watch(authProvider)
-        .when(
-          data: (user) {},
-          loading: () {
-            return const Center(child: CircularProgressIndicator());
-          },
-          error: (_, __) {
-            return const Center(child: Text(AppStrings.errorOccurred));
-          },
-        );
-    final widthSize = MediaQuery.sizeOf(context).width;
+    final contentWidth =
+        widthSize > 1200
+            ? widthSize * 0.3
+            : widthSize > 600
+            ? widthSize * 0.6
+            : widthSize;
+
     return Scaffold(
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 60),
           child: Form(
             key: _formKey,
-            child: Builder(
-              builder: (context) {
-                return Center(
-                  child: SingleChildScrollView(
-                    child: SizedBox(
-                      width:
-                          widthSize > 1200
-                              ? widthSize * .3
-                              : widthSize > 600
-                              ? widthSize * .6
-                              : widthSize,
-                      child: Column(
-                        children: [
-                          const HeaderText(title: AppStrings.register),
-                          const SizedBox(height: 100),
-                          UserInputSection(
-                            emailController: emailController,
-                            passController: passController,
-                          ),
-                          const SizedBox(height: 40),
-                          SubmitButton(
-                            onPressed:
-                                authState.isLoading
-                                    ? null
-                                    : () {
-                                      if (_formKey.currentState!.validate()) {
-                                        authNotifier.registerWithEmail(
-                                          emailController.text,
-                                          passController.text,
-                                        );
-                                      }
-                                    },
-                            text: AppStrings.register,
-                          ),
-
-                          const NavigationSection(isLogin: false),
-                          const SizedBox(height: 20),
-
-                          SocialSection(authNotifier: authNotifier),
-                        ],
+            child: Center(
+              child: SingleChildScrollView(
+                child: SizedBox(
+                  width: contentWidth,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      const HeaderText(title: AppStrings.register),
+                      const SizedBox(height: 100),
+                      UserInputSection(
+                        emailController: emailController,
+                        passController: passController,
                       ),
-                    ),
+                      const SizedBox(height: 40),
+                      SubmitButton(
+                        onPressed:
+                            authState.isLoading
+                                ? null
+                                : () {
+                                  if (_formKey.currentState!.validate()) {
+                                    authNotifier.registerWithEmail(
+                                      emailController.text,
+                                      passController.text,
+                                    );
+                                  }
+                                },
+                        text: AppStrings.register,
+                        isLoading: authState.isLoading,
+                      ),
+                      const NavigationSection(isLogin: false),
+                      const SizedBox(height: 20),
+                      SocialSection(authNotifier: authNotifier),
+                    ],
                   ),
-                );
-              },
+                ),
+              ),
             ),
           ),
         ),

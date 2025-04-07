@@ -22,6 +22,9 @@ class AuthStateNotifier extends StateNotifier<AsyncValue<User?>> {
     final result = await AsyncValue.guard(
       () async => await repository.signInWithEmail(email, password),
     );
+    if (result.hasError) {
+      state = const AsyncValue.data(null);
+    }
     state = result;
   }
 
@@ -30,6 +33,9 @@ class AuthStateNotifier extends StateNotifier<AsyncValue<User?>> {
     final result = await AsyncValue.guard(
       () async => await repository.registerWithEmail(email, password),
     );
+    if (result.hasError) {
+      state = const AsyncValue.data(null);
+    }
     state = result;
   }
 
@@ -38,6 +44,9 @@ class AuthStateNotifier extends StateNotifier<AsyncValue<User?>> {
     final result = await AsyncValue.guard(
       () async => await repository.signInWithGoogle(),
     );
+    if (result.hasError) {
+      state = const AsyncValue.data(null);
+    }
     state = result;
   }
 

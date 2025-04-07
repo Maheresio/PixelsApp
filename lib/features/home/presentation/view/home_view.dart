@@ -1,11 +1,16 @@
 import 'dart:async';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:pixels_app/features/home/presentation/controller/bloc/photo_bloc.dart';
 import 'package:pixels_app/features/home/presentation/widgets/home_view_body.dart';
 
-
+import '../../../../core/app_router.dart';
+import '../../../../core/app_strings.dart';
+import '../../../auth/presentation/controller/auth_provider.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -52,6 +57,7 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: const LogoutFloatingButton(),
       body: HomeViewBody(
         scrollController: scrollController,
         searchController: searchController,
@@ -66,6 +72,44 @@ class _HomeViewState extends State<HomeView> {
           });
         },
       ),
+    );
+  }
+}
+
+class LogoutFloatingButton extends ConsumerWidget {
+  const LogoutFloatingButton({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    ref.listen<AsyncValue<User?>>(authProvider, (previous, next) {
+      next.whenOrNull(
+        error: (error, _) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Logout failed: ${error.toString()}'),
+              backgroundColor: Colors.red,
+            ),
+          );
+        },
+        data: (user) {
+          if (user == null && previous?.value != null) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text(AppStrings.logoutSuccessful),
+                backgroundColor: Colors.green,
+              ),
+            );
+            GoRouter.of(context).pushReplacement(AppRouter.loginView);
+          }
+        },
+      );
+    });
+
+    return FloatingActionButton(
+      onPressed: () async {
+        ref.read(authProvider.notifier).signOut();
+      },
+      child: const Icon(Icons.logout),
     );
   }
 }

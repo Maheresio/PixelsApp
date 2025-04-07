@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pixels_app/core/app_colors.dart';
 import 'package:pixels_app/core/app_router.dart';
@@ -64,16 +63,18 @@ class _LoginViewState extends ConsumerState<LoginView> {
         error: (error, _) {
           final errorMessage =
               error is Failure ? error.message : error.toString();
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(
-                errorMessage,
-                style: const TextStyle(color: Colors.white),
+          if (previous?.hasError != true) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                  errorMessage,
+                  style: const TextStyle(color: Colors.white),
+                ),
+                backgroundColor: AppColors.kPrimary,
+                duration: const Duration(seconds: 3),
               ),
-              backgroundColor: AppColors.kPrimary,
-              duration: const Duration(seconds: 3),
-            ),
-          );
+            );
+          }
         },
       );
     });
@@ -87,49 +88,47 @@ class _LoginViewState extends ConsumerState<LoginView> {
             key: _formKey,
             child: Builder(
               builder: (context) {
-                return authState.isLoading
-                    ? const Center(child: CircularProgressIndicator())
-                    : Center(
-                      child: SingleChildScrollView(
-                        child: SizedBox(
-                          width:
-                              widthSize > 1200
-                                  ? widthSize * .3
-                                  : widthSize > 600
-                                  ? widthSize * .6
-                                  : widthSize,
-                          child: Column(
-                            children: [
-                              const HeaderText(title: AppStrings.login),
-                              const SizedBox(height: 100),
-                              UserInputSection(
-                                emailController: emailController,
-                                passController: passController,
-                              ),
-                              const SizedBox(height: 40),
-                              SubmitButton(
-                                onPressed:
-                                    authState.isLoading
-                                        ? null
-                                        : () {
-                                          if (_formKey.currentState!
-                                              .validate()) {
-                                            authNotifier.signInWithEmail(
-                                              emailController.text,
-                                              passController.text,
-                                            );
-                                          }
-                                        },
-                                text: AppStrings.login,
-                              ),
-                              const NavigationSection(),
-                              const SizedBox(height: 20),
-                              SocialSection(authNotifier: authNotifier),
-                            ],
+                return Center(
+                  child: SingleChildScrollView(
+                    child: SizedBox(
+                      width:
+                          widthSize > 1200
+                              ? widthSize * .3
+                              : widthSize > 600
+                              ? widthSize * .6
+                              : widthSize,
+                      child: Column(
+                        children: [
+                          const HeaderText(title: AppStrings.login),
+                          const SizedBox(height: 100),
+                          UserInputSection(
+                            emailController: emailController,
+                            passController: passController,
                           ),
-                        ),
+                          const SizedBox(height: 40),
+                          SubmitButton(
+                            onPressed:
+                                authState.isLoading
+                                    ? null
+                                    : () {
+                                      if (_formKey.currentState!.validate()) {
+                                        authNotifier.signInWithEmail(
+                                          emailController.text,
+                                          passController.text,
+                                        );
+                                      }
+                                    },
+                            text: AppStrings.login,
+                            isLoading: authState.isLoading,
+                          ),
+                          const NavigationSection(),
+                          const SizedBox(height: 20),
+                          SocialSection(authNotifier: authNotifier),
+                        ],
                       ),
-                    );
+                    ),
+                  ),
+                );
               },
             ),
           ),
