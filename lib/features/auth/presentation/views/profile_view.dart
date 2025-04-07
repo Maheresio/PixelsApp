@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/app_router.dart';
+import '../../../../core/app_strings.dart';
 import '../controller/auth_provider.dart';
 
 class ProfileView extends ConsumerWidget {
@@ -13,7 +14,7 @@ class ProfileView extends ConsumerWidget {
     final authNotifier = ref.watch(authProvider.notifier);
 
     return Scaffold(
-      appBar: AppBar(title: const Text("Home")),
+      appBar: AppBar(title: const Text(AppStrings.home)),
       body: Center(
         child: ElevatedButton(
           onPressed: () async {
@@ -22,14 +23,14 @@ class ProfileView extends ConsumerWidget {
             if (context.mounted) {
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
-                  content: Text('Logout successful!'),
+                  content: Text(AppStrings.logoutSuccessful),
                   backgroundColor: Colors.green,
                 ),
               );
               GoRouter.of(context).pushReplacement(AppRouter.loginView);
             }
           },
-          child: const Text("Logout"),
+          child: const Text(AppStrings.logout),
         ),
       ),
     );

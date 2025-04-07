@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:pixels_app/core/app_router.dart';
+import 'package:pixels_app/core/app_strings.dart';
 import '../controller/auth_provider.dart';
 
 class LandingView extends ConsumerWidget {
@@ -18,7 +19,7 @@ class LandingView extends ConsumerWidget {
           stream: authStream,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(child: const CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             }
 
             if (snapshot.hasError) {
@@ -28,19 +29,19 @@ class LandingView extends ConsumerWidget {
                   const Icon(Icons.error, color: Colors.red, size: 48),
                   const SizedBox(height: 8),
                   Text(
-                    'An error occurred: ${snapshot.error}',
+                   '${AppStrings.anErrorOccurred}: ${snapshot.error}',
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 8),
                   TextButton(
                     onPressed: () => {ref.refresh(authRepositoryProvider)},
-                    child: const Text('Retry'),
+                    child: const Text(AppStrings.retry),
                   ),
                 ],
               );
             }
 
-            // 3. When data is available
+            
             Future.microtask(() {
               if (context.mounted) {
                 final user = snapshot.data;
@@ -52,7 +53,7 @@ class LandingView extends ConsumerWidget {
               }
             });
 
-            return Center(child: const CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           },
         ),
       ),

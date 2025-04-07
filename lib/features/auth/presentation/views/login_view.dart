@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -53,7 +52,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
             passController.clear();
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
-                content: Text('Login successful!'),
+                content: Text(AppStrings.loginSuccessful),
                 backgroundColor: Colors.green,
               ),
             );
@@ -78,8 +77,6 @@ class _LoginViewState extends ConsumerState<LoginView> {
       );
     });
 
-
-
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -89,11 +86,11 @@ class _LoginViewState extends ConsumerState<LoginView> {
             child: Builder(
               builder: (context) {
                 return authState.isLoading
-                    ? Center(child: CircularProgressIndicator())
+                    ? const Center(child: CircularProgressIndicator())
                     : SingleChildScrollView(
                       child: Column(
                         children: [
-                          HeaderText(title: AppStrings.login),
+                          const HeaderText(title: AppStrings.login),
                           const SizedBox(height: 100),
                           UserInputSection(
                             emailController: emailController,
@@ -114,7 +111,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
                                     },
                             text: AppStrings.login,
                           ),
-                          NavigationSection(),
+                          const NavigationSection(),
                           const SizedBox(height: 20),
                           SocialSection(authNotifier: authNotifier),
                         ],

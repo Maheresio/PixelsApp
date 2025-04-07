@@ -20,7 +20,7 @@ class StyledSocialButton extends StatelessWidget {
           splashColor: Theme.of(
             context,
           ).colorScheme.primary.withValues(alpha: 0.1),
-          child: Center(
+          child: const Center(
             child: Icon(FontAwesomeIcons.google, color: AppColors.kPrimary),
           ),
         ),

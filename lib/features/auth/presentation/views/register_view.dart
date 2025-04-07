@@ -53,7 +53,7 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
             passController.clear();
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
-                content: Text('Login successful!'),
+                content: Text(AppStrings.loginSuccessful),
                 backgroundColor: Colors.green,
               ),
             );
@@ -83,10 +83,10 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
         .when(
           data: (user) {},
           loading: () {
-            return Center(child: const CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           },
           error: (_, __) {
-            return const Center(child: Text('Error occurred'));
+            return const Center(child: Text(AppStrings.errorOccurred));
           },
         );
 
@@ -101,13 +101,13 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                 return SingleChildScrollView(
                   child: Column(
                     children: [
-                      HeaderText(title: AppStrings.register),
-                      SizedBox(height: 100),
+                      const HeaderText(title: AppStrings.register),
+                      const SizedBox(height: 100),
                       UserInputSection(
                         emailController: emailController,
                         passController: passController,
                       ),
-                      SizedBox(height: 40),
+                      const SizedBox(height: 40),
                       SubmitButton(
                         onPressed:
                             authState.isLoading
@@ -123,7 +123,7 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                         text: AppStrings.register,
                       ),
 
-                      NavigationSection(isLogin: false),
+                      const NavigationSection(isLogin: false),
                       const SizedBox(height: 20),
 
                       SocialSection(authNotifier: authNotifier),

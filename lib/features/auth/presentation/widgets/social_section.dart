@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pixels_app/features/auth/presentation/controller/auth_provider.dart';
 
+import '../../../../core/app_strings.dart';
 import 'styled_social_button.dart';
 
 class SocialSection extends StatelessWidget {
@@ -12,12 +13,12 @@ class SocialSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Row(
+        const Row(
           spacing: 8,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Expanded(child: Divider()),
-            const Text('Or login with'),
+            Text(AppStrings.orLoginWith),
             Expanded(child: Divider()),
           ],
         ),
