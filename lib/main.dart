@@ -1,29 +1,25 @@
 import 'package:device_preview/device_preview.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'core/app_colors.dart';
-import 'core/theme.dart';
 
 import 'core/app_router.dart';
+import 'core/helpers/styled_status_bar.dart';
+import 'core/service_locator.dart';
+import 'core/theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  SystemChrome.setSystemUIOverlayStyle(
-    const SystemUiOverlayStyle(
-      statusBarColor: AppColors.kPrimary,
-      systemNavigationBarColor: AppColors.kPrimary,
-      systemNavigationBarDividerColor: AppColors.kPrimary,
-    ),
-  );
+  styledStatusBar();
+  setupServiceLocator();
   await dotenv.load();
   runApp(
     ProviderScope(
       child: DevicePreview(
+        enabled: false,
         builder: (context) => const SafeArea(bottom: false, child: MyApp()),
       ),
     ),
