@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -10,7 +9,7 @@ import '../features/auth/presentation/views/register_view.dart';
 import '../features/home/data/repository/home_repository_impl.dart';
 import '../features/home/presentation/controller/bloc/photo_bloc.dart';
 import '../features/home/presentation/view/home_view.dart';
-import 'services/api_service.dart';
+import 'service_locator.dart';
 
 class AppRouter {
   static const String landingView = '/';
@@ -41,16 +40,13 @@ class AppRouter {
         path: AppRouter.homeView,
         builder:
             (context, state) => BlocProvider(
-              create:
-                  (context) => PhotoBloc(HomeRepositoryImpl(ApiService(Dio()))),
+              create: (context) => PhotoBloc(sl<HomeRepositoryImpl>()),
               child: const HomeView(),
             ),
         pageBuilder:
             (context, state) => CustomTransitionPage(
               child: BlocProvider(
-                create:
-                    (context) =>
-                        PhotoBloc(HomeRepositoryImpl(ApiService(Dio()))),
+                create: (context) => PhotoBloc(sl<HomeRepositoryImpl>()),
                 child: const HomeView(),
               ),
               transitionsBuilder: (
