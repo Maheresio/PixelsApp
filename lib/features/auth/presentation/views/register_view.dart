@@ -60,6 +60,7 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
               );
             }
             GoRouter.of(context).go(AppRouter.homeView);
+            next = const AsyncData(null);
           }
         },
         loading: () {},
@@ -80,6 +81,7 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
           }
         },
       );
+      next = const AsyncData(null);
     });
 
     final contentWidth =

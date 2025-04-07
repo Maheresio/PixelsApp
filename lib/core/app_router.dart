@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
@@ -43,6 +44,33 @@ class AppRouter {
               create:
                   (context) => PhotoBloc(HomeRepositoryImpl(ApiService(Dio()))),
               child: const HomeView(),
+            ),
+        pageBuilder:
+            (context, state) => CustomTransitionPage(
+              child: BlocProvider(
+                create:
+                    (context) =>
+                        PhotoBloc(HomeRepositoryImpl(ApiService(Dio()))),
+                child: const HomeView(),
+              ),
+              transitionsBuilder: (
+                context,
+                animation,
+                secondaryAnimation,
+                child,
+              ) {
+                const begin = Offset(0.0, 1.0);
+                const end = Offset.zero;
+                const curve = Curves.easeInOut;
+
+                var tween = Tween(
+                  begin: begin,
+                  end: end,
+                ).chain(CurveTween(curve: curve));
+                var offsetAnimation = animation.drive(tween);
+
+                return SlideTransition(position: offsetAnimation, child: child);
+              },
             ),
       ),
     ],
