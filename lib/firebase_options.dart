@@ -3,6 +3,7 @@
 import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 import 'package:flutter/foundation.dart'
     show defaultTargetPlatform, kIsWeb, TargetPlatform;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 /// Default [FirebaseOptions] for use with your Firebase apps.
 ///
@@ -40,8 +41,8 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyCEJLDdc1i_jlvwd0p3H54d1LQ1yZ1ZWVg',
+  static FirebaseOptions web = FirebaseOptions(
+    apiKey: dotenv.env['FIREBASE_API_KEY_WEB']!,
     appId: '1:875996163443:web:2e3c9d2773c1df56ffa906',
     messagingSenderId: '875996163443',
     projectId: 'pixels-app-b38c4',
@@ -50,36 +51,38 @@ class DefaultFirebaseOptions {
     measurementId: 'G-6H51KPGZC7',
   );
 
-  static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAVBUrPodKqCVdIDsR04Yt6BTKuEtBNcc0',
+  static FirebaseOptions android = FirebaseOptions(
+    apiKey: dotenv.env['FIREBASE_API_KEY_ANDROID']!,
     appId: '1:875996163443:android:4f4a0553845079e4ffa906',
     messagingSenderId: '875996163443',
     projectId: 'pixels-app-b38c4',
     storageBucket: 'pixels-app-b38c4.firebasestorage.app',
   );
 
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBzlgv3WO1JrxRjYfEad0-fQDlQ9imgD0c',
+  static FirebaseOptions ios = FirebaseOptions(
+    apiKey: dotenv.env['FIREBASE_API_KEY_IOS']!,
     appId: '1:875996163443:ios:b305c103cc2a1b57ffa906',
     messagingSenderId: '875996163443',
     projectId: 'pixels-app-b38c4',
     storageBucket: 'pixels-app-b38c4.firebasestorage.app',
-    iosClientId: '875996163443-kl1bi1oqmqnc331536ig0ot4pmdcmufj.apps.googleusercontent.com',
+    iosClientId:
+        '875996163443-kl1bi1oqmqnc331536ig0ot4pmdcmufj.apps.googleusercontent.com',
     iosBundleId: 'com.example.pixelsApp',
   );
 
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyBzlgv3WO1JrxRjYfEad0-fQDlQ9imgD0c',
+  static FirebaseOptions macos = FirebaseOptions(
+    apiKey: dotenv.env['FIREBASE_API_KEY_MACOS']!,
     appId: '1:875996163443:ios:b305c103cc2a1b57ffa906',
     messagingSenderId: '875996163443',
     projectId: 'pixels-app-b38c4',
     storageBucket: 'pixels-app-b38c4.firebasestorage.app',
-    iosClientId: '875996163443-kl1bi1oqmqnc331536ig0ot4pmdcmufj.apps.googleusercontent.com',
+    iosClientId:
+        '875996163443-kl1bi1oqmqnc331536ig0ot4pmdcmufj.apps.googleusercontent.com',
     iosBundleId: 'com.example.pixelsApp',
   );
 
-  static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyCEJLDdc1i_jlvwd0p3H54d1LQ1yZ1ZWVg',
+  static FirebaseOptions windows = FirebaseOptions(
+    apiKey: dotenv.env['FIREBASE_API_KEY_WINDOWS']!,
     appId: '1:875996163443:web:3976b093c2363af8ffa906',
     messagingSenderId: '875996163443',
     projectId: 'pixels-app-b38c4',
