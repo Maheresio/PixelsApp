@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+
 import '../../../../core/app_colors.dart';
 import '../../../../core/app_router.dart';
 import '../../../../core/app_strings.dart';
-import 'package:pixels_app/features/auth/presentation/widgets/header_text.dart';
-
 import '../../../../core/error/failure.dart';
 import '../controller/auth_provider.dart';
+import '../widgets/header_text.dart';
 import '../widgets/navigation_section.dart';
 import '../widgets/social_section.dart';
 import '../widgets/submit_button.dart';
@@ -50,12 +50,15 @@ class _LoginViewState extends ConsumerState<LoginView> {
           if (user != null) {
             emailController.clear();
             passController.clear();
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text(AppStrings.loginSuccessful),
-                backgroundColor: Colors.green,
-              ),
-            );
+
+            if (previous != next) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text(AppStrings.loginSuccessful),
+                  backgroundColor: Colors.green,
+                ),
+              );
+            }
             GoRouter.of(context).go(AppRouter.homeView);
           }
         },
@@ -63,7 +66,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
         error: (error, _) {
           final errorMessage =
               error is Failure ? error.message : error.toString();
-          if (previous?.hasError != true) {
+          if (previous != next) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text(

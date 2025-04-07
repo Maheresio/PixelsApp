@@ -51,12 +51,14 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
           if (user != null) {
             emailController.clear();
             passController.clear();
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text(AppStrings.loginSuccessful),
-                backgroundColor: Colors.green,
-              ),
-            );
+            if (previous != next) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text(AppStrings.loginSuccessful),
+                  backgroundColor: Colors.green,
+                ),
+              );
+            }
             GoRouter.of(context).go(AppRouter.homeView);
           }
         },
@@ -64,7 +66,7 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
         error: (error, _) {
           final errorMessage =
               error is Failure ? error.message : error.toString();
-          if (previous?.hasError != true) {
+          if (previous != next) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text(
