@@ -1,9 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
+import '../../../../core/app_colors.dart';
 import '../../../../core/app_router.dart';
 import '../../../../core/app_strings.dart';
+import '../../../../core/app_styles.dart';
 import '../controller/auth_provider.dart';
 
 class LandingView extends ConsumerWidget {
@@ -18,28 +22,45 @@ class LandingView extends ConsumerWidget {
         child: StreamBuilder<User?>(
           stream: authStream,
           builder: (context, snapshot) {
-           
-
-            if (snapshot.hasError) {
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Icon(Icons.error, color: Colors.red, size: 48),
-                  const SizedBox(height: 8),
-                  Text(
-                   '${AppStrings.anErrorOccurred}: ${snapshot.error}',
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 8),
-                  TextButton(
-                    onPressed: () => {ref.refresh(authRepositoryProvider)},
-                    child: const Text(AppStrings.retry),
-                  ),
-                ],
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation(AppColors.kPrimary),
+                ),
               );
             }
 
-            
+            if (snapshot.hasError) {
+              debugPrint('Auth error in LandingView: ${snapshot.error}');
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.error_outline, color: AppColors.kErrorColor, size: 48.sp),
+                    SizedBox(height: 16.h),
+                    Text(
+                      '${AppStrings.anErrorOccurred}: ${snapshot.error}',
+                      style: AppStyles.text14Medium.copyWith(color: AppColors.kErrorColor),
+                      textAlign: TextAlign.center,
+                    ),
+                    SizedBox(height: 16.h),
+                    ElevatedButton(
+                      onPressed: () => ref.refresh(authRepositoryProvider),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.kPrimary,
+                        padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
+                      ),
+                      child: Text(
+                        AppStrings.retry,
+                        style: AppStyles.text14Medium.copyWith(color: AppColors.kwhite),
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            }
+
+            // Defer navigation to after build
             Future.microtask(() {
               if (context.mounted) {
                 final user = snapshot.data;
@@ -51,7 +72,9 @@ class LandingView extends ConsumerWidget {
               }
             });
 
-            return const Center(child: SizedBox());
+            return const Center(child: CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation(AppColors.kPrimary),
+            )); 
           },
         ),
       ),
