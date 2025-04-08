@@ -1,12 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../core/service_locator.dart';
 import '../../data/repository/auth_repository.dart';
-import '../../data/repository/auth_repository_impl.dart';
-import '../../data/services/auth_service.dart';
 
 final authRepositoryProvider = Provider<AuthRepository>((ref) {
-  return AuthRepositoryImpl(AuthService());
+  return sl<AuthRepository>();
 });
 
 final authStateProvider = StreamProvider<User?>((ref) {
@@ -20,34 +19,38 @@ class AuthStateNotifier extends StateNotifier<AsyncValue<User?>> {
   Future<void> signInWithEmail(String email, String password) async {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(
-      () async => repository.signInWithEmail(email, password),
+      ()  => repository.signInWithEmail(email, password),
     );
   }
 
   Future<void> registerWithEmail(String email, String password) async {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(
-      () async => repository.registerWithEmail(email, password),
+      ()  => repository.registerWithEmail(email, password),
     );
   }
 
   Future<void> signInWithGoogle() async {
     state = const AsyncValue.loading();
-    state = await AsyncValue.guard(() async => repository.signInWithGoogle());
+    state = await AsyncValue.guard(()  => repository.signInWithGoogle());
   }
 
   Future<void> signOut() async {
-    // await AsyncValue.guard(() async => await repository.signOut());
-    // state = const AsyncValue.data(null);
-    final result = await AsyncValue.guard(() => repository.signOut());
-    state =
-        result.hasError
-            ? AsyncError(result.error!, result.stackTrace!)
-            : const AsyncValue.data(null);
-  }
+  state = const AsyncValue.loading();
+  await AsyncValue.guard(() => repository.signOut());
+  state = const AsyncValue.data(null);
 }
-
+}
 final authProvider =
     StateNotifierProvider<AuthStateNotifier, AsyncValue<User?>>((ref) {
       return AuthStateNotifier(ref.watch(authRepositoryProvider));
     });
+
+
+final loginProvider = StateNotifierProvider.autoDispose<AuthStateNotifier, AsyncValue<User?>>((ref) {
+  return AuthStateNotifier(ref.watch(authRepositoryProvider));
+});
+
+final registerProvider = StateNotifierProvider.autoDispose<AuthStateNotifier, AsyncValue<User?>>((ref) {
+  return AuthStateNotifier(ref.watch(authRepositoryProvider));
+});

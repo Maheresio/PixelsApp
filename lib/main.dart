@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:pixels_app/core/widgets/keyboard_dismisser.dart';
 
 import 'core/app_router.dart';
 import 'core/helpers/styled_status_bar.dart';
@@ -14,8 +15,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   styledStatusBar();
-  setupServiceLocator();
   await dotenv.load();
+  setupServiceLocator();
   runApp(
     ProviderScope(
       child: DevicePreview(
@@ -31,22 +32,19 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      designSize: const Size(375, 812),
-      minTextAdapt: true,
-      splitScreenMode: true,
-      builder: (context, child) {
-        return GestureDetector(
-          onTap: () {
-            FocusScope.of(context).unfocus();
-          },
-          child: MaterialApp.router(
+    return KeyboardDismisser(
+      child: ScreenUtilInit(
+        designSize: const Size(375, 812),
+        minTextAdapt: true,
+        splitScreenMode: true,
+        builder: (context, child) {
+          return MaterialApp.router(
             routerConfig: AppRouter.router,
             debugShowCheckedModeBanner: false,
             theme: theme,
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }

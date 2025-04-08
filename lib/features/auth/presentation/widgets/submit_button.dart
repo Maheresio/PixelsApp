@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'overlay_loading_indicator.dart';
+
 class SubmitButton extends StatelessWidget {
   const SubmitButton({
     super.key,
@@ -18,7 +20,7 @@ class SubmitButton extends StatelessWidget {
       height: 50,
       child:
           isLoading
-              ? const Center(child: CircularProgressIndicator())
+              ? const Center(child: OverlayLoadingIndicator())
               : ElevatedButton(onPressed: onPressed, child: Text(text)),
     );
   }

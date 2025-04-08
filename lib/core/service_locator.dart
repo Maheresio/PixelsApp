@@ -1,5 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:pixels_app/features/auth/data/repository/auth_repository.dart';
+import 'package:pixels_app/features/auth/data/repository/auth_repository_impl.dart';
+import 'package:pixels_app/features/auth/data/services/auth_service.dart';
+import 'package:pixels_app/features/home/data/repository/home_repository.dart';
 
 import '../features/home/data/repository/home_repository_impl.dart';
 import 'services/api_service.dart';
@@ -7,12 +11,15 @@ import 'services/api_service.dart';
 final GetIt sl = GetIt.instance;
 
 void setupServiceLocator() {
-  // Register Dio
-  sl.registerLazySingleton(() => Dio());
+  sl.registerLazySingleton<Dio>(() => Dio());
 
-  // Register ApiService
-  sl.registerLazySingleton(() => ApiService(sl<Dio>()));
+  sl.registerLazySingleton<ApiService>(() => ApiService(sl<Dio>()));
+  sl.registerLazySingleton<AuthService>(() => AuthService());
 
-  // Register HomeRepository
-  sl.registerLazySingleton(() => HomeRepositoryImpl(sl<ApiService>()));
+  sl.registerLazySingleton<AuthRepository>(
+    () => AuthRepositoryImpl(sl<AuthService>()),
+  );
+  sl.registerLazySingleton<HomeRepository>(
+    () => HomeRepositoryImpl(sl<ApiService>()),
+  );
 }

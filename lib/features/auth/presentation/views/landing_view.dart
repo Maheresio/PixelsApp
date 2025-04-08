@@ -9,6 +9,7 @@ import '../../../../core/app_router.dart';
 import '../../../../core/app_strings.dart';
 import '../../../../core/app_styles.dart';
 import '../controller/auth_provider.dart';
+import '../widgets/overlay_loading_indicator.dart';
 
 class LandingView extends ConsumerWidget {
   const LandingView({super.key});
@@ -23,11 +24,7 @@ class LandingView extends ConsumerWidget {
           stream: authStream,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(
-                child: CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation(AppColors.kPrimary),
-                ),
-              );
+              return const OverlayLoadingIndicator();
             }
 
             if (snapshot.hasError) {
@@ -36,11 +33,17 @@ class LandingView extends ConsumerWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.error_outline, color: AppColors.kErrorColor, size: 48.sp),
+                    Icon(
+                      Icons.error_outline,
+                      color: AppColors.kErrorColor,
+                      size: 48.sp,
+                    ),
                     SizedBox(height: 16.h),
                     Text(
                       '${AppStrings.anErrorOccurred}: ${snapshot.error}',
-                      style: AppStyles.text14Medium.copyWith(color: AppColors.kErrorColor),
+                      style: AppStyles.text14Medium.copyWith(
+                        color: AppColors.kErrorColor,
+                      ),
                       textAlign: TextAlign.center,
                     ),
                     SizedBox(height: 16.h),
@@ -48,11 +51,16 @@ class LandingView extends ConsumerWidget {
                       onPressed: () => ref.refresh(authRepositoryProvider),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.kPrimary,
-                        padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 24.w,
+                          vertical: 12.h,
+                        ),
                       ),
                       child: Text(
                         AppStrings.retry,
-                        style: AppStyles.text14Medium.copyWith(color: AppColors.kwhite),
+                        style: AppStyles.text14Medium.copyWith(
+                          color: AppColors.kwhite,
+                        ),
                       ),
                     ),
                   ],
@@ -72,9 +80,7 @@ class LandingView extends ConsumerWidget {
               }
             });
 
-            return const Center(child: CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation(AppColors.kPrimary),
-            )); 
+            return const OverlayLoadingIndicator();
           },
         ),
       ),
