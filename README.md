@@ -1,7 +1,3 @@
-Absolutely—here's an enhanced version of your README with the additions for **pagination**, **search debouncing**, and **state management details (Riverpod for Auth, Bloc for Home)** woven in naturally:
-
----
-
 # PixelsApp - The Ultimate Photo Exploration Experience 📸✨
 
 ![Pixels Banner](banner.jpg)  
