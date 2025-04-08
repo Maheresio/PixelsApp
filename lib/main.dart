@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:pixels_app/core/widgets/keyboard_dismisser.dart';
+import 'core/widgets/keyboard_dismisser.dart';
 
 import 'core/app_router.dart';
 import 'core/helpers/styled_status_bar.dart';

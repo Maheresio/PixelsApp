@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart'; // For kDebugMode
+
 import 'failure.dart';
 
 class ServerFailure extends Failure {

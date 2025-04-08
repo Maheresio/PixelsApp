@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:pixels_app/features/auth/utils/utils.dart';
 
 import '../../../../core/app_router.dart';
 import '../../../../core/app_strings.dart';
+import '../../utils/utils.dart';
 import '../controller/auth_provider.dart';
 import '../widgets/header_text.dart';
 import '../widgets/navigation_section.dart';

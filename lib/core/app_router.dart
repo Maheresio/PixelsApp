@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:pixels_app/features/home/data/repository/home_repository.dart';
+import '../features/home/data/repository/home_repository.dart';
 
 import '../features/auth/presentation/views/landing_view.dart';
 import '../features/auth/presentation/views/login_view.dart';
