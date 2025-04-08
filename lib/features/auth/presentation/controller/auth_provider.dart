@@ -31,7 +31,6 @@ class AuthStateNotifier extends StateNotifier<AsyncValue<User?>> {
   }
 
   Future<void> signInWithGoogle() async {
-    state = const AsyncValue.loading();
     state = await AsyncValue.guard(()  => repository.signInWithGoogle());
   }
 
