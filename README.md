@@ -101,7 +101,7 @@ Welcome to **PixelsApp**, a Flutter-powered marvel that redefines how users expl
 
 ## 🤝 About the Developer
 
-Crafted by [Your Name], a Flutter virtuoso and mobile development maestro. With PixelsApp, I’ve unleashed a symphony of code, design, and innovation. My skills shine through in:
+Crafted by Ahmed Maher, a Flutter virtuoso and mobile development maestro. With PixelsApp, I’ve unleashed a symphony of code, design, and innovation. My skills shine through in:
 - **API Integration**: Pexels API tamed with surgical precision.
 - **Clean Architecture**: MVVM executed with the elegance of a grandmaster.
 - **State Management**: Riverpod and Bloc wielded like a dual-blade katana.
