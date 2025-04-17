@@ -22,7 +22,7 @@
 </p>  
 *These aren’t just screenshots—they’re windows into a masterpiece of design and functionality.*
 
-## 🚀 Project Overview
+##  Project Overview
 
 Welcome to **PixelsApp**, a Flutter-powered marvel that redefines how users explore and interact with breathtaking photography. Integrated with the **Pexels API**, this app delivers a universe of curated and searchable images with unparalleled elegance and efficiency. From seamless authentication to a dynamic photo grid, PixelsApp is the pinnacle of mobile app craftsmanship—a testament to innovation, artistry, and technical brilliance.
 
