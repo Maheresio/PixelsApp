@@ -34,7 +34,7 @@ class LogoutFloatingButton extends ConsumerWidget {
             );
             Future.delayed(const Duration(seconds: 1), () {
               if (!context.mounted) return;
-              GoRouter.of(context).pushReplacement(AppRouter.loginView);
+             context.go(AppRouter.loginView);
             });
           }
         },

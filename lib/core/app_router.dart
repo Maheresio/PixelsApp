@@ -8,6 +8,7 @@ import '../features/auth/presentation/views/login_view.dart';
 import '../features/auth/presentation/views/register_view.dart';
 import '../features/home/presentation/controller/bloc/photo_bloc.dart';
 import '../features/home/presentation/view/home_view.dart';
+import 'helpers/custom_transition.dart';
 import 'service_locator.dart';
 
 class AppRouter {
@@ -15,7 +16,7 @@ class AppRouter {
   static const String loginView = '/login';
   static const String registerView = '/register';
   static const String homeView = '/home';
-  
+
   static final GoRouter router = GoRouter(
     initialLocation: landingView,
     routes: [
@@ -25,13 +26,21 @@ class AppRouter {
       ),
       GoRoute(
         path: AppRouter.loginView,
-        builder: (context, state) => const LoginView(),
+        pageBuilder:
+            (context, state) => buildPageWithDefaultTransition(
+              state: state,
+              child: const LoginView(),
+            ),
       ),
       GoRoute(
         path: AppRouter.registerView,
-        builder: (context, state) => const RegisterView(),
+        pageBuilder:
+            (context, state) => buildPageWithDefaultTransition(
+              state: state,
+              child: const RegisterView(),
+            ),
       ),
-    
+
       GoRoute(
         path: AppRouter.homeView,
         builder:

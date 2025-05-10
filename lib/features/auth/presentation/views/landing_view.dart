@@ -80,7 +80,7 @@ class LandingView extends ConsumerWidget {
               }
             });
 
-            return const OverlayLoadingIndicator();
+            return const Center(child: OverlayLoadingIndicator());
           },
         ),
       ),

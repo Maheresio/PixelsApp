@@ -21,9 +21,9 @@ class NavigationSection extends StatelessWidget {
         TextButton(
           onPressed: () {
             if (isLogin) {
-              GoRouter.of(context).push(AppRouter.registerView);
+              context.go(AppRouter.registerView);
             } else {
-              GoRouter.of(context).push(AppRouter.loginView);
+              context.go(AppRouter.loginView);
             }
           },
           child: Text(

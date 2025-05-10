@@ -23,7 +23,6 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
   late TextEditingController emailController;
   late TextEditingController passController;
   final _formKey = GlobalKey<FormState>();
-
   @override
   void initState() {
     super.initState();
@@ -40,7 +39,7 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
 
   @override
   Widget build(BuildContext context) {
-    final authNotifier = ref.read(registerProvider.notifier);
+    final authNotifier = ref.watch(registerProvider.notifier);
     final authState = ref.watch(registerProvider);
     final widthSize = MediaQuery.sizeOf(context).width;
 
@@ -52,7 +51,7 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
               previous: previous,
               next: next,
               context: context,
-              navigateTo: () => GoRouter.of(context).push(AppRouter.loginView),
+              navigateTo: () => context.go(AppRouter.loginView),
               snackBarContent: AppStrings.registerSuccessful,
               emailController: emailController,
               passController: passController,
@@ -95,8 +94,7 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                       UserInputSection(
                         emailController: emailController,
                         passController: passController,
-                        onFieldSubmitted:
-                            (_) => _submit(context, authNotifier),
+                        onFieldSubmitted: (_) => _submit(context, authNotifier),
                       ),
                       const SizedBox(height: 40),
                       SubmitButton(

@@ -22,7 +22,7 @@ void showErrorSnackBar({
           style: const TextStyle(color: Colors.white),
         ),
         backgroundColor: AppColors.kPrimary,
-        duration: const Duration(seconds: 3),
+        duration: const Duration(seconds: 5),
       ),
     );
   }
